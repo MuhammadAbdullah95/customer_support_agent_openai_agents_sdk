@@ -1,0 +1,28 @@
+[project]
+name = "customer-support"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "MuhammadAbdullah95", email = "ma2404374@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "chainlit>=2.4.400",
+    "google-ai-haystack>=5.1.0",
+    "haystack-ai>=2.13.1",
+    "nltk>=3.9.1",
+    "openai-agents>=0.0.9",
+    "pathlib>=1.0.1",
+    "pinecone-haystack>=5.1.0",
+    "psycopg2>=2.9.10",
+    "sentence-transformers>=3.0.0",
+    "sqlalchemy>=2.0.40",
+]
+
+[project.scripts]
+customer-support = "customer_support:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
