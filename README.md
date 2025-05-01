@@ -27,6 +27,7 @@ An intelligent, multi-agent hotel booking assistant powered by Python, FastAPI,C
 
 - **Python 3.11+**
 - **FastAPI** (or Flask)
+- **Chainlit** (for UI)
 - **PostgreSQL**
 - **SQLAlchemy** (ORM)
 - **LangChain / OpenAI Agents SDK** (for agent orchestration)
