@@ -130,6 +130,11 @@ cd customer_support_agent_openai_agents_sdk
 2. Set up your `.env` file:
 
 ```
+GOOGLE_API_KEY=your_api_key
+HUGGINGFACEHUB_API_TOKEN=your_api_token
+PINECONE_API_KEY=your_api_key
+PINECONE_ENV=your_env
+OPENAI_API_KEY=your_api_key
 DB_USER=postgres
 DB_PASS=yourpassword
 DB_NAME=hotel_management_system
