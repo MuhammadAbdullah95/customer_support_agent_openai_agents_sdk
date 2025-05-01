@@ -152,9 +152,9 @@ uv sync
 5. Run the app:
 
 ```bash
-python main.py
-```
 uv run chainlit run main.py
+```
+
 ---
 
 ## 📈 Future Improvements
