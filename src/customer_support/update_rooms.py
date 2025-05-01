@@ -1,4 +1,5 @@
 import os
+from agents.tool import function_tool
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from sqlalchemy import text
@@ -47,11 +48,14 @@ def get_db():
 
 
 
-
+@function_tool
 def update_user_room(cnic: str, new_room_id: int):
     """
     Updates a user's reserved room to a new room if it's available.
     Also updates the room status accordingly.
+    Args:
+        cnic (str): CNIC of the user.
+        new_room_id (int): New room ID
     """
     try:
         with Session(engine) as db:

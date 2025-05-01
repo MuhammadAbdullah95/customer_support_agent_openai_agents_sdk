@@ -8,7 +8,7 @@ from haystack_integrations.components.generators.google_ai import GoogleAIGemini
 from haystack import Pipeline
 import os
 from dotenv import load_dotenv
-from utils import pinecone_config
+from QAsystem.utils import pinecone_config
 prompt_template = """You are a **Hotel's Virtual Assistant**. Your task is to answer the user's query based on the provided context. Follow these guidelines:
 
 1. **Refine the Output**:

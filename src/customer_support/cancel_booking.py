@@ -1,4 +1,6 @@
 import os
+from agents.tool import function_tool
+import os
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from sqlalchemy import text
@@ -42,11 +44,13 @@ def get_db():
     finally:
         db.close()
 
-
+@function_tool
 def cancel_booking(cnic: str):
     """
     Cancels the booking for a user identified by CNIC.
     Frees the reserved room and deletes the user_booking entry.
+    Args:
+        cnic (str): CNIC of the user.
     """
     try:
         with Session(engine) as db:

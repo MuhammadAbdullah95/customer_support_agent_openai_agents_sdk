@@ -7,8 +7,8 @@ from haystack.components.converters import TextFileToDocument
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-# from QAsystem.utils import pinecone_config
-from utils import pinecone_config
+from QAsystem.utils import pinecone_config
+# from utils import pinecone_config
 
 
 def ingest(document_store):

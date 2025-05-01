@@ -1,4 +1,5 @@
 import os
+from agents.tool import function_tool
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from sqlalchemy import text
@@ -43,10 +44,17 @@ def get_db():
         db.close()
 
 # Function to get room availability from the 'rooms' table
+@function_tool
 def reserve_room(cnic: str, name: str, contact: str, room_id: int):
     """
+    Reserver room for the customer,
     Reserve a room if available. Returns a message about the result.
     Handles all relevant constraint violations and errors.
+    Args:
+        cnic (str): CNIC of the customer.
+        name (str): Name of the customer.
+        contact (str): Contact number of the customer.
+        room_id (int): Room no. to be reserved.
     """
     try:
         with Session(engine) as db:

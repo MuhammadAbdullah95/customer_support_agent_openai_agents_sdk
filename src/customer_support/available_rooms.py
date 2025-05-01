@@ -1,8 +1,9 @@
 import os
+from agents.tool import function_tool
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from dotenv import load_dotenv
-
+from sqlalchemy.exc import SQLAlchemyError
 # Load environment variables from .env file
 load_dotenv()
 
@@ -39,6 +40,7 @@ def get_db():
         db.close()
 
 # Function to get room availability from the 'rooms' table
+@function_tool
 def get_rooms_availability():
     """
     Fetches all room availability records from the 'rooms' table.
@@ -54,6 +56,35 @@ def get_rooms_availability():
     except Exception as e:
         print(f"Error in get_rooms_availability: {e}")
         return []
+    
+@function_tool
+def check_room_status(room_id: int):
+    """
+    Check the availability status of a specific room by its ID.
+    Returns 'Available', 'Reserved', or a user-friendly message if the room doesn't exist.
+    Args: 
+        room_id (int): ID of the room to check.
+    Returns:
+        str: Status of the room.
+    """
+    try:
+        with Session(engine) as db:
+            result = db.execute(
+                text("SELECT status FROM rooms WHERE id = :room_id"),
+                {"room_id": room_id}
+            ).fetchone()
+
+            if result is None:
+                return f"❌ Room ID {room_id} does not exist."
+
+            status = result[0]
+            return f"✅ Room {room_id} is currently: {status}."
+
+    except SQLAlchemyError as e:
+        return f"❌ Database error while checking room status: {str(e)}"
+
+    except Exception as e:
+        return f"❌ Unexpected error: {str(e)}"
 
 # Run the function when the script is executed directly
 if __name__ == "__main__":
