@@ -7,6 +7,7 @@ import re
 from instructions import instructions
 from agents_tools import availableRooms, booking_agent
 from customer_support.FAQs import FAQs_retreivel
+from customer_support.available_rooms import get_rooms_availability, check_room_status
 from chainlit.input_widget import TextInput
 import os
 from dotenv import load_dotenv
@@ -95,14 +96,12 @@ async def start():
     cl.user_session.set("config", config)
 
     agent = Agent(name="Innovia", instructions=instructions, tools=[
-        availableRooms.rooms_availability_checker_agent.as_tool(
-            tool_name="Rooms_availability_checker",
-            tool_description="Check rooms availability"
-        ),
         booking_agent.booking_agent.as_tool(
             tool_name="Booking_tool",
             tool_description="Book a room"
         ),
+        get_rooms_availability,
+        check_room_status,
         FAQs_retreivel
     ])
 

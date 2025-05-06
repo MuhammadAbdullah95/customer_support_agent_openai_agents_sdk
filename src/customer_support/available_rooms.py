@@ -49,7 +49,7 @@ def get_rooms_availability():
     """
     try:
         with Session(engine) as db:
-            stmt = text("SELECT * FROM rooms WHERE status = 'Available'")
+            stmt = text("SELECT * FROM rooms WHERE status = 'Available' ORDER BY id ASC")
             result = db.execute(stmt)
             rows = result.fetchall()
             return [dict(row._mapping) for row in rows]  # Convert each row to a dict
