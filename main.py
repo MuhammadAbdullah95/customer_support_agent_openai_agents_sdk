@@ -7,6 +7,9 @@ import re
 from instructions import instructions
 from agents_tools import availableRooms, booking_agent
 from customer_support.FAQs import FAQs_retreivel
+from customer_support.booking import reserve_room
+from customer_support.cancel_booking import cancel_booking
+from customer_support.update_rooms import update_user_room
 from customer_support.available_rooms import get_rooms_availability, check_room_status
 from chainlit.input_widget import TextInput
 import os
@@ -96,10 +99,9 @@ async def start():
     cl.user_session.set("config", config)
 
     agent = Agent(name="Innovia", instructions=instructions, tools=[
-        booking_agent.booking_agent.as_tool(
-            tool_name="Booking_tool",
-            tool_description="Book a room"
-        ),
+        reserve_room,
+        cancel_booking,
+        update_user_room,
         get_rooms_availability,
         check_room_status,
         FAQs_retreivel
